@@ -1,34 +1,15 @@
-
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.net.UnknownHostException;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-
-import org.apache.commons.httpclient.ConnectTimeoutException;
-import org.apache.commons.httpclient.HttpClientError;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
-import org.apache.commons.httpclient.params.HttpConnectionParams;
-import org.apache.commons.httpclient.protocol.ControllerThreadSocketFactory;
 import org.apache.commons.httpclient.protocol.Protocol;
-import org.apache.commons.httpclient.protocol.SecureProtocolSocketFactory;
 import org.apache.commons.lang.StringUtils;
 
-import com.qunar.qfwrapper.bean.booking.BookingInfo;
 import com.qunar.qfwrapper.bean.booking.BookingResult;
 import com.qunar.qfwrapper.bean.search.FlightDetail;
 import com.qunar.qfwrapper.bean.search.FlightSearchParam;
@@ -54,12 +35,13 @@ public String getHtml(FlightSearchParam arg0) {
 		QFHttpClient httpClient = new QFHttpClient(arg0, false);
 		httpClient.getParams().setCookiePolicy(CookiePolicy.BROWSER_COMPATIBILITY);
 		
-		// 闁俺绻冩禒锝囨倞鐠佸潡妫?		//httpClient.getHostConfiguration().setProxy("127.0.0.1", 8888);
+		// 閫氳繃浠ｇ悊璁块棶
+		//httpClient.getHostConfiguration().setProxy("127.0.0.1", 8888);
 		//Protocol.registerProtocol("https", new Protocol("https", new MySecureProtocolSocketFactory(), 443));		
 				
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date depDate = format.parse(arg0.getDepDate());
-		Date retDate = format.parse(arg0.getDepDate());
+		Date retDate = format.parse(arg0.getRetDate());
 		SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");  
 		String strDateDepDate = sdf.format(depDate);
 		String strDateRetDate = sdf.format(retDate);
@@ -91,7 +73,7 @@ public String getHtml(FlightSearchParam arg0) {
 		post.setRequestBody(names);
 		//String cookie = StringUtils.join(httpClient.getState().getCookies(),"; ");	
 		//httpClient.getState().clearCookies();
-		//post.addRequestHeader("Cookie","language=EN; superT_v1=1404280911144.926736%3A1%3A3%3A3; __utma=148764265.1377672688.1404281281.1404281281.1404281281.1; __utmz=148764265.1404281281.1.1.utmcsr=atlasjet.com|utmccn=(referral)|utmcmd=referral|utmcct=/MainPage; __atuvc=1%7C27; superT_v1=1404280911144.926736%3A2%3A1%3A4; superT_s1=1404867648937.196350; sp-camp-3=%7B%22step1-displayed%22%3Atrue%2C%22viDa%22%3A1404871251%7D; __utma=166957934.1878006112.1404280919.1404280919.1404867651.2; __utmb=166957934.12.8.1404867724219; __utmz=166957934.1404280919.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmc=166957934");
+		//post.addRequestHeader("Cookie","superT_v1=1404095351754.181863%3A1%3A1%3A1; superT_s1=1404095351757.26231; __utma=166957934.233118461.1404095355.1404095355.1404095355.1; __utmb=166957934.12.8.1404095421275; __utmc=166957934; __utmz=166957934.1404095355.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)");
 		post.setRequestHeader("Referer", "http://www.atlasjet.com/MainPage");
 		//post.getParams().setContentCharset("UTF-8");
 		post.setRequestHeader("Connection", "Keep-Alive");
@@ -115,75 +97,9 @@ public String getHtml(FlightSearchParam arg0) {
 
 	@Override
 	public BookingResult getBookingInfo(FlightSearchParam arg0) {
-		String bookingUrlPre = "https://online.atlasjet.com/AtlasOnline/passenger.kk";
-		BookingResult bookingResult = new BookingResult();
-		BookingInfo bookingInfo = new BookingInfo();
-		bookingInfo.setAction(bookingUrlPre);
-		bookingInfo.setMethod("post");
-		
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		Date depDate = null;
-		Date retDate = null;
-		try {
-			depDate = format.parse(arg0.getDepDate());
-			retDate = format.parse(arg0.getRetDate());
-		}	catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");  
-		String strDateDepDate = sdf.format(depDate);
-		//String strDateRetDate = sdf.format(retDate);
-		
-		
-		Map<String, String> map = new LinkedHashMap<String, String>();
-		map.put("historyCookieId			","																						");
-		map.put("selectedPlan0Class","20140719ATLJETADAADBKK93128#YT#09:05#119.0");
-		map.put("selectedPlan1Class","");
-		map.put("selectedPlan2Class","");
-		map.put("selectedPlan3Class","");
-		map.put("selectedPlan4Class","");
-		map.put("selectedPlan5Class","");
-		map.put("flightPlan0","20140719ATLJETADAADBKK93128#YT#09:05#119.0");
-		map.put("isAwardJetmilPage","false");
-		map.put("direction","1");
-		map.put("from",arg0.getDep());
-		map.put("to",arg0.getArr());
-		map.put("depdate",strDateDepDate);
-		map.put("retdate",strDateDepDate);
-		map.put("adult","1");
-		map.put("yp","0");
-		map.put("chd","0");
-		map.put("inf","0");
-		map.put("stu","0");
-		map.put("tsk","0");
-		map.put("sc","0");
-		map.put("wherefrom","searchpage");
-		map.put("selectedTo",arg0.getArr());
-		map.put("selectedOpenJaw","");
-		map.put("currentDeptDate",strDateDepDate);
-		map.put("currentRetDate",strDateDepDate);
-		map.put("fromDesc",arg0.getDep() + "NA");
-		map.put("toDesc",arg0.getArr());
-		map.put("openjawDesc","");
-		map.put("curr","null");
-		map.put("totalBasePrice","115TL");
-		map.put("totalBasePriceAsTL","115");
-		map.put("totalTaxPrice","54TL");
-		map.put("totalServiceFeePrice","10TL");
-		map.put("totalPrice","179TL");
-		map.put("totalPriceAsTL","(179TL)");
-		map.put("totalPassengerCount","1");
-		map.put("totalJetmilPoint","");
-		
-		bookingInfo.setContentType("UTF-8");
-		bookingInfo.setInputs(map);
-		bookingResult.setData(bookingInfo);
-		bookingResult.setRet(true);
-		return bookingResult;
+		// TODO Auto-generated method stub
+		return null;
 	}
-
-	
 
 	public ProcessResultInfo process(String arg0, FlightSearchParam arg1) {
 		String html = arg0;
@@ -200,7 +116,7 @@ public String getHtml(FlightSearchParam arg0) {
 			return result;	
 		}
 		
-		// 闁告瑦鐗曢崵顓㈡嚋椤忓棗鐤嗗ǎ鍥ｅ墲娴?		//String html2 = StringUtils.substringBetween(html,"<tr class=\"showContent\">" ,"</tr>");
+		// 閸欐牕鍤懜顏嗗疆娣団剝浼�		//String html2 = StringUtils.substringBetween(html,"<tr class=\"showContent\">" ,"</tr>");
 		String html2 = StringUtils.substringBetween(html,"<tbody>" ,"</tbody>");
 		String[] flights = html2.split("<tr class=\"showContent\">");
 		
@@ -209,42 +125,41 @@ public String getHtml(FlightSearchParam arg0) {
 			String Price = "";
 			String moneyUnit =  "";
 			for (int i = 1; i < flights.length; i++){
-				// 濡澘瀚崢娑欏緞閸曨厽鍊濰tml
+				// 妫板嫬鍘涙径鍕倞Html
 				String flightHtml = flights[i];
-				flightHtml = flightHtml.replaceAll("</?[^<]+>", "");	// 閺夆晛娲﹂幎銈夊棘閸モ晝褰块柛鎰噹椤旀劖绋夐鐘崇暠html
-				flightHtml = flightHtml.replaceAll("\\s*|\t|\r|\n", "");	// 闁告ê顭峰▍搴ｇ矚閻戞澹愰柕鍡曠閸╂鎮伴妸褜鍎婇柕鍡曠濞叉牗娼敂钘夊簥閻?
-				flightHtml = flightHtml.replaceAll("&nbsp;:", "");	// 闁告ê顭峰▍搴ｇ矚閻戞澹?				flightHtml = flightHtml.replaceAll("&nbsp;", "");
+				flightHtml = flightHtml.replaceAll("</?[^<]+>", "");	// 鏉╁洦鎶ら弬鍥╃彿閸愬懎顔愭稉顓犳畱html
+				flightHtml = flightHtml.replaceAll("\\s*|\t|\r|\n", "");	// 閸樺娅庣粚鐑樼壐閵嗕礁鍩楃悰銊ь儊閵嗕礁娲栨潪锔藉床鐞�
+				flightHtml = flightHtml.replaceAll("&nbsp;:", "");	// 閸樺娅庣粚鐑樼壐
+				flightHtml = flightHtml.replaceAll("&nbsp;", "");
 				
-				// 鐎殿喒鍋撳┑顔碱儓琚欓柡?..
+				// 瀵偓婵袙閺�..
 				String DepartureFlight = StringUtils.substringBetween(flights[i], "<td  style=\"\" title=\"\">", "</td>");
 				DepartureFlight = DepartureFlight.replaceAll("\\s*|\t|\r|\n", "");
-				int zzbz = StringUtils.indexOf(flights[i], "rowspan=\"");	// 濞戞搩鍙€濞村棝寮介崶褏绠?				if (zzbz >= 0) {
+				int zzbz = StringUtils.indexOf(flights[i], "rowspan=\"");	// 娑擃叀娴嗛弽鍥х箶
+				if (zzbz >= 0) {
 					String temp = StringUtils.substringBetween(flights[i], "rowspan=\"", "\"");
 					zzbz = Integer.parseInt(temp);
 				}
-				if (zzbz > 0) {	// 闁哄倹濯介崺鍛存偟?
-					String flightHtmlPrice = StringUtils.substringBetween(flights[i], "<label", "label"); // 闁规惌浜滆ぐ鍥ㄧ闁垮澹?					flightHtmlPrice = StringUtils.substringBetween(flightHtmlPrice, ">","<");
+				if (zzbz > 0) {	// 閺傛媽鍩呴悵?
+					String flightHtmlPrice = StringUtils.substringBetween(flights[i], "<label", "label"); // 閹搭亜褰囨禒閿嬬壐
+					flightHtmlPrice = StringUtils.substringBetween(flightHtmlPrice, ">","<");
 					Pattern pt=Pattern.compile("([0-9]|\\.|\\-)*");
 					Matcher m=pt.matcher(flightHtmlPrice);
 					m.find();
 					Price=m.group();
 					moneyUnit =  flightHtmlPrice.substring(Price.length());
 					moneyUnit = moneyUnit.replaceAll("\\s*|\t|\r|\n", "");
-					if(moneyUnit.equals("TL")){
-						moneyUnit="TRL";
-					}
-					
-				} else {	// 濞戞搩鍙€濞村棝鎳滈鍡楃枂
-					// 闂佹彃娲ㄩ弫銈嗙▔婵犱胶顏遍柣婵愬幒閻滎垶寮?
+				} else {	// 娑擃叀娴嗛懜顏嗗疆
+					// 闁插洨鏁ゆ稉濠佺閻濐厺鐜弽?
 				}
 				
-				// 閻犱礁澧介悿鍝筧seFlight
+				// 鐠佸墽鐤哹aseFlight
 				if (zzbz > 0) {
 					OneWayFlightInfo baseFlight = new OneWayFlightInfo();
 					FlightDetail flightDetail = new FlightDetail();
 					List<FlightSegement> segs = new ArrayList<FlightSegement>();
 					
-					//	閻犱礁澧介悿鍞俵ightDetail
+					//	鐠佸墽鐤唂lightDetail
 					List<String> flightNoList = new ArrayList<String>();
 					flightNoList.add(DepartureFlight);
 					flightDetail.setFlightno(flightNoList);
@@ -260,7 +175,7 @@ public String getHtml(FlightSearchParam arg0) {
 					flightDetail.setWrapperid(arg1.getWrapperid());
 					baseFlight.setDetail(flightDetail);
 					
-					// 閻犱礁澧介悿鍜秎ightSegement
+					// 鐠佸墽鐤咶lightSegement
 					String deptimes = flightHtml.substring(0, 5);
 					String arrtimes = flightHtml.substring(5, 10);
 					FlightSegement seg = new FlightSegement();
@@ -277,18 +192,18 @@ public String getHtml(FlightSearchParam arg0) {
 					
 					baseFlight.setInfo(segs);
 					flightList.add(baseFlight);
-				} else {	// 濞戞搩鍙€濞村棝鎳滈鍡楃枂
+				} else {	// 娑擃叀娴嗛懜顏嗗疆
 					OneWayFlightInfo baseFlight = flightList.get(flightList.size() - 1);
 					FlightDetail flightDetail = baseFlight.getDetail();
 					List<FlightSegement> segs = baseFlight.getInfo();
 					
-					//	閻犱礁澧介悿鍞俵ightDetail
+					//	鐠佸墽鐤唂lightDetail
 					List<String> flightNoList = flightDetail.getFlightno();
 					flightNoList.add(DepartureFlight);
 					flightDetail.setFlightno(flightNoList);
 					baseFlight.setDetail(flightDetail);
 					
-					// 閻犱礁澧介悿鍜秎ightSegement
+					// 鐠佸墽鐤咶lightSegement
 					String deptimes = flightHtml.substring(0, 5);
 					String arrtimes = flightHtml.substring(5, 10);
 					FlightSegement seg = new FlightSegement();
@@ -322,5 +237,33 @@ public String getHtml(FlightSearchParam arg0) {
 		}
 	}
 
+	public static void main(String[] args) {
+		FlightSearchParam searchParam = new FlightSearchParam();
+		searchParam.setDep("ADA");
+		searchParam.setArr("IST");
+		searchParam.setDepDate("2014-07-24");
+		searchParam.setRetDate("2014-07-24");
+		searchParam.setTimeOut("60000");
+		searchParam.setToken("");
+		searchParam.setWrapperid("Wrapper_gjdairkk001");
+		
+		Wrapper_gjdairkk001 gjdairkk001 = new  Wrapper_gjdairkk001();
+		String html = gjdairkk001.getHtml(searchParam);
+	    System.out.println(html);
 
+		ProcessResultInfo result = new ProcessResultInfo();
+		result = gjdairkk001.process(html,searchParam);
+		if(result.isRet() && result.getStatus().equals(Constants.SUCCESS))
+		{
+			List<OneWayFlightInfo> flightList = (List<OneWayFlightInfo>) result.getData();
+			for (OneWayFlightInfo in : flightList){
+				System.out.println("************" + in.getInfo().toString());
+				System.out.println("++++++++++++" + in.getDetail().toString());
+			}
+		}
+		else
+		{
+			System.out.println(result.getStatus());
+		}
+	}	
 }
