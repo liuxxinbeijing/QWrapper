@@ -91,7 +91,7 @@ public String getHtml(FlightSearchParam arg0) {
 		post.setRequestBody(names);
 		//String cookie = StringUtils.join(httpClient.getState().getCookies(),"; ");	
 		//httpClient.getState().clearCookies();
-		post.addRequestHeader("Cookie","language=EN; superT_v1=1404280911144.926736%3A1%3A3%3A3; __utma=148764265.1377672688.1404281281.1404281281.1404281281.1; __utmz=148764265.1404281281.1.1.utmcsr=atlasjet.com|utmccn=(referral)|utmcmd=referral|utmcct=/MainPage; __atuvc=1%7C27; superT_v1=1404280911144.926736%3A2%3A1%3A4; superT_s1=1404867648937.196350; sp-camp-3=%7B%22step1-displayed%22%3Atrue%2C%22viDa%22%3A1404871251%7D; __utma=166957934.1878006112.1404280919.1404280919.1404867651.2; __utmb=166957934.12.8.1404867724219; __utmz=166957934.1404280919.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmc=166957934");
+		//post.addRequestHeader("Cookie","language=EN; superT_v1=1404280911144.926736%3A1%3A3%3A3; __utma=148764265.1377672688.1404281281.1404281281.1404281281.1; __utmz=148764265.1404281281.1.1.utmcsr=atlasjet.com|utmccn=(referral)|utmcmd=referral|utmcct=/MainPage; __atuvc=1%7C27; superT_v1=1404280911144.926736%3A2%3A1%3A4; superT_s1=1404867648937.196350; sp-camp-3=%7B%22step1-displayed%22%3Atrue%2C%22viDa%22%3A1404871251%7D; __utma=166957934.1878006112.1404280919.1404280919.1404867651.2; __utmb=166957934.12.8.1404867724219; __utmz=166957934.1404280919.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmc=166957934");
 		post.setRequestHeader("Referer", "http://www.atlasjet.com/MainPage");
 		//post.getParams().setContentCharset("UTF-8");
 		post.setRequestHeader("Connection", "Keep-Alive");
