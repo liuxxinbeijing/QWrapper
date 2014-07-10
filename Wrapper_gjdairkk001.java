@@ -149,6 +149,9 @@ public String getHtml(FlightSearchParam arg0) {
 					Price=m.group();
 					moneyUnit =  flightHtmlPrice.substring(Price.length());
 					moneyUnit = moneyUnit.replaceAll("\\s*|\t|\r|\n", "");
+					if(moneyUnit.equals("TL")){
+						moneyUnit="TRL";
+					}
 				} else {	// 娑擃叀娴嗛懜顏嗗疆
 					// 闁插洨鏁ゆ稉濠佺閻濐厺鐜弽?
 				}
@@ -237,33 +240,4 @@ public String getHtml(FlightSearchParam arg0) {
 		}
 	}
 
-	public static void main(String[] args) {
-		FlightSearchParam searchParam = new FlightSearchParam();
-		searchParam.setDep("ADA");
-		searchParam.setArr("IST");
-		searchParam.setDepDate("2014-07-24");
-		searchParam.setRetDate("2014-07-24");
-		searchParam.setTimeOut("60000");
-		searchParam.setToken("");
-		searchParam.setWrapperid("Wrapper_gjdairkk001");
-		
-		Wrapper_gjdairkk001 gjdairkk001 = new  Wrapper_gjdairkk001();
-		String html = gjdairkk001.getHtml(searchParam);
-	    System.out.println(html);
-
-		ProcessResultInfo result = new ProcessResultInfo();
-		result = gjdairkk001.process(html,searchParam);
-		if(result.isRet() && result.getStatus().equals(Constants.SUCCESS))
-		{
-			List<OneWayFlightInfo> flightList = (List<OneWayFlightInfo>) result.getData();
-			for (OneWayFlightInfo in : flightList){
-				System.out.println("************" + in.getInfo().toString());
-				System.out.println("++++++++++++" + in.getDetail().toString());
-			}
-		}
-		else
-		{
-			System.out.println(result.getStatus());
-		}
-	}	
 }
