@@ -52,7 +52,7 @@ public String getHtml(FlightSearchParam arg0) {
 		{
 		// get all query parameters from the url set by wrapperSearchInterface
 		QFHttpClient httpClient = new QFHttpClient(arg0, false);
-		//httpClient.getParams().setCookiePolicy(CookiePolicy.BROWSER_COMPATIBILITY);
+		httpClient.getParams().setCookiePolicy(CookiePolicy.BROWSER_COMPATIBILITY);
 		
 		// 闁俺绻冩禒锝囨倞鐠佸潡妫?		//httpClient.getHostConfiguration().setProxy("127.0.0.1", 8888);
 		//Protocol.registerProtocol("https", new Protocol("https", new MySecureProtocolSocketFactory(), 443));		
