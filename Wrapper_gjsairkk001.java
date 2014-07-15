@@ -103,7 +103,7 @@ public String getHtml(FlightSearchParam arg0) {
 
 	@Override
 	public BookingResult getBookingInfo(FlightSearchParam arg0) {
-		String bookingUrlPre = "https://online.atlasjet.com/AtlasOnline/passenger.kk";
+		String bookingUrlPre = "https://online.atlasjet.com/AtlasOnline/availability.kk";
 		BookingResult bookingResult = new BookingResult();
 		BookingInfo bookingInfo = new BookingInfo();
 		bookingInfo.setAction(bookingUrlPre);
@@ -121,49 +121,28 @@ public String getHtml(FlightSearchParam arg0) {
 		
 		SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");  
 		String strDateDepDate = sdf.format(depDate);
-		String strRetRetDate = sdf.format(retDate);
+		String strDateRetDate = sdf.format(retDate);
 		
 		
 		Map<String, String> map = new LinkedHashMap<String, String>();
-		map.put("historyCookieId			","																						");
-		map.put("selectedPlan0Class","20140724ATLJETADAISTKK31#YD#09:05#67.0");
-		map.put("selectedPlan1Class","20140731ATLJETISTADAKK30#YX#07:00#77.0");
-		map.put("selectedPlan2Class","");
-		map.put("selectedPlan3Class","");
-		map.put("selectedPlan4Class","");
-		map.put("selectedPlan5Class","");
-		map.put("flightPlan0","20140724ATLJETADAISTKK31#YD#09:05#67.00");
-		map.put("flightPlan1","20140731ATLJETISTADAKK30#YX#07:00#77.00");
-		map.put("isAwardJetmilPage","false");
-		map.put("direction","0");
 		map.put("from",arg0.getDep());
 		map.put("to",arg0.getArr());
+		map.put("lang","EN");
+		map.put("direction","1");
 		map.put("depdate",strDateDepDate);
-		map.put("retdate",strRetRetDate);
+		map.put("retdate",strDateRetDate);
 		map.put("adult","1");
 		map.put("yp","0");
 		map.put("chd","0");
 		map.put("inf","0");
+		map.put("sc","0");
 		map.put("stu","0");
 		map.put("tsk","0");
-		map.put("sc","0");
-		map.put("wherefrom","searchpage");
-		map.put("selectedTo",arg0.getArr());
-		map.put("selectedOpenJaw","");
-		map.put("currentDeptDate",strDateDepDate);
-		map.put("currentRetDate",strRetRetDate);
-		map.put("fromDesc",arg0.getDep());//闁告绮敮鈧ù? "NA"
-		map.put("toDesc",arg0.getArr());
-		map.put("openjawDesc","");
-		map.put("curr","null");
-		map.put("totalBasePrice","131 TL");
-		map.put("totalBasePriceAsTL","131");
-		map.put("totalTaxPrice","63 TL");
-		map.put("totalServiceFeePrice","10 TL");
-		map.put("totalPrice","204 TL");
-		map.put("totalPriceAsTL"," (204 TL)");
-		map.put("totalPassengerCount","1");
-		map.put("totalJetmilPoint","");
+		map.put("refid","www.atlasjet.com");
+		map.put("paramstatus","1");
+		map.put("openjaw","");
+		map.put("bannerSize","200x200");
+		map.put("curr","USD");		
 		
 		bookingInfo.setContentType("UTF-8");
 		bookingInfo.setInputs(map);
@@ -171,6 +150,7 @@ public String getHtml(FlightSearchParam arg0) {
 		bookingResult.setRet(true);
 		return bookingResult;
 	}
+
 
 
 	public ProcessResultInfo process(String arg0, FlightSearchParam arg1) {
