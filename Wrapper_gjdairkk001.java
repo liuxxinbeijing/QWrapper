@@ -98,7 +98,7 @@ public String getHtml(FlightSearchParam arg0) {
 
 	@Override
 	public BookingResult getBookingInfo(FlightSearchParam arg0) {
-String bookingUrlPre = "https://online.atlasjet.com/AtlasOnline/passenger.kk";
+String bookingUrlPre = "https://online.atlasjet.com/AtlasOnline/availability.kk";
 		BookingResult bookingResult = new BookingResult();
 		BookingInfo bookingInfo = new BookingInfo();
 		bookingInfo.setAction(bookingUrlPre);
@@ -116,48 +116,28 @@ String bookingUrlPre = "https://online.atlasjet.com/AtlasOnline/passenger.kk";
 		
 		SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");  
 		String strDateDepDate = sdf.format(depDate);
-		//String strDateRetDate = sdf.format(retDate);
+		String strDateRetDate = sdf.format(retDate);
 		
 		
 		Map<String, String> map = new LinkedHashMap<String, String>();
-		map.put("historyCookieId			","																						");
-		map.put("selectedPlan0Class","20140719ATLJETADAADBKK93128#YT#09:05#119.0");
-		map.put("selectedPlan1Class","");
-		map.put("selectedPlan2Class","");
-		map.put("selectedPlan3Class","");
-		map.put("selectedPlan4Class","");
-		map.put("selectedPlan5Class","");
-		map.put("flightPlan0","20140719ATLJETADAADBKK93128#YT#09:05#119.0");
-		map.put("isAwardJetmilPage","false");
-		map.put("direction","1");
 		map.put("from",arg0.getDep());
 		map.put("to",arg0.getArr());
+		map.put("lang","EN");
+		map.put("direction","1");
 		map.put("depdate",strDateDepDate);
-		map.put("retdate",strDateDepDate);
+		map.put("retdate",strDateRetDate);
 		map.put("adult","1");
 		map.put("yp","0");
 		map.put("chd","0");
 		map.put("inf","0");
+		map.put("sc","0");
 		map.put("stu","0");
 		map.put("tsk","0");
-		map.put("sc","0");
-		map.put("wherefrom","searchpage");
-		map.put("selectedTo",arg0.getArr());
-		map.put("selectedOpenJaw","");
-		map.put("currentDeptDate",strDateDepDate);
-		map.put("currentRetDate",strDateDepDate);
-		map.put("fromDesc",arg0.getDep());
-		map.put("toDesc",arg0.getArr());
-		map.put("openjawDesc","");
-		map.put("curr","null");
-		map.put("totalBasePrice","115TL");
-		map.put("totalBasePriceAsTL","115");
-		map.put("totalTaxPrice","54TL");
-		map.put("totalServiceFeePrice","10TL");
-		map.put("totalPrice","179TL");
-		map.put("totalPriceAsTL","(179TL)");
-		map.put("totalPassengerCount","1");
-		map.put("totalJetmilPoint","");
+		map.put("refid","www.atlasjet.com");
+		map.put("paramstatus","1");
+		map.put("openjaw","");
+		map.put("bannerSize","200x200");
+		map.put("curr","USD");		
 		
 		bookingInfo.setContentType("UTF-8");
 		bookingInfo.setInputs(map);
@@ -165,6 +145,7 @@ String bookingUrlPre = "https://online.atlasjet.com/AtlasOnline/passenger.kk";
 		bookingResult.setRet(true);
 		return bookingResult;
 	}
+
 
 	public ProcessResultInfo process(String arg0, FlightSearchParam arg1) {
 		String html = arg0;
