@@ -68,7 +68,8 @@ public String getHtml(FlightSearchParam arg0) {
 				new NameValuePair("refid","www.atlasjet.com"),
 				new NameValuePair("paramstatus","1"),
 				new NameValuePair("openjaw",""),
-				new NameValuePair("bannerSize","200x200")
+				new NameValuePair("bannerSize","200x200"),
+				new NameValuePair("curr","USD")
 		};
 		post.setRequestBody(names);
 		//String cookie = StringUtils.join(httpClient.getState().getCookies(),"; ");	
