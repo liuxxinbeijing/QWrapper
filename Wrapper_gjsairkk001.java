@@ -128,7 +128,7 @@ public String getHtml(FlightSearchParam arg0) {
 		map.put("from",arg0.getDep());
 		map.put("to",arg0.getArr());
 		map.put("lang","EN");
-		map.put("direction","1");
+		map.put("direction","0");
 		map.put("depdate",strDateDepDate);
 		map.put("retdate",strDateRetDate);
 		map.put("adult","1");
@@ -142,7 +142,7 @@ public String getHtml(FlightSearchParam arg0) {
 		map.put("paramstatus","1");
 		map.put("openjaw","");
 		map.put("bannerSize","200x200");
-		map.put("curr","USD");		
+		//map.put("curr","USD");		
 		
 		bookingInfo.setContentType("UTF-8");
 		bookingInfo.setInputs(map);
