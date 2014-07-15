@@ -65,7 +65,7 @@ public String getHtml(FlightSearchParam arg0) {
 				new NameValuePair("sc","0"),
 				new NameValuePair("stu","0"),
 				new NameValuePair("tsk","0"),
-				new NameValuePair("refid","www.atlasjet.com"),
+				//new NameValuePair("refid","www.atlasjet.com"),
 				new NameValuePair("paramstatus","1"),
 				new NameValuePair("openjaw",""),
 				new NameValuePair("bannerSize","200x200"),
