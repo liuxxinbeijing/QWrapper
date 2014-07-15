@@ -98,52 +98,7 @@ public String getHtml(FlightSearchParam arg0) {
 
 	@Override
 	public BookingResult getBookingInfo(FlightSearchParam arg0) {
-String bookingUrlPre = "https://online.atlasjet.com/AtlasOnline/availability.kk";
-		BookingResult bookingResult = new BookingResult();
-		BookingInfo bookingInfo = new BookingInfo();
-		bookingInfo.setAction(bookingUrlPre);
-		bookingInfo.setMethod("post");
-		
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		Date depDate = null;
-		Date retDate = null;
-		try {
-			depDate = format.parse(arg0.getDepDate());
-			retDate = format.parse(arg0.getRetDate());
-		}	catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");  
-		String strDateDepDate = sdf.format(depDate);
-		String strDateRetDate = sdf.format(retDate);
-		
-		
-		Map<String, String> map = new LinkedHashMap<String, String>();
-		map.put("from",arg0.getDep());
-		map.put("to",arg0.getArr());
-		map.put("lang","EN");
-		map.put("direction","1");
-		map.put("depdate",strDateDepDate);
-		map.put("retdate",strDateRetDate);
-		map.put("adult","1");
-		map.put("yp","0");
-		map.put("chd","0");
-		map.put("inf","0");
-		map.put("sc","0");
-		map.put("stu","0");
-		map.put("tsk","0");
-		//map.put("refid","www.atlasjet.com");
-		map.put("paramstatus","1");
-		map.put("openjaw","");
-		map.put("bannerSize","200x200");
-		map.put("curr","USD");		
-		
-		bookingInfo.setContentType("UTF-8");
-		bookingInfo.setInputs(map);
-		bookingResult.setData(bookingInfo);
-		bookingResult.setRet(true);
-		return bookingResult;
+return null;
 	}
 
 
