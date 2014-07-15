@@ -98,7 +98,7 @@ public String getHtml(FlightSearchParam arg0) {
 
 	@Override
 	public BookingResult getBookingInfo(FlightSearchParam arg0) {
-		String bookingUrlPre = "https://online.atlasjet.com/AtlasOnline/passenger.kk";
+String bookingUrlPre = "https://online.atlasjet.com/AtlasOnline/passenger.kk";
 		BookingResult bookingResult = new BookingResult();
 		BookingInfo bookingInfo = new BookingInfo();
 		bookingInfo.setAction(bookingUrlPre);
@@ -165,7 +165,6 @@ public String getHtml(FlightSearchParam arg0) {
 		bookingResult.setRet(true);
 		return bookingResult;
 	}
-
 
 	public ProcessResultInfo process(String arg0, FlightSearchParam arg1) {
 		String html = arg0;
