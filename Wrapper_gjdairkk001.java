@@ -65,7 +65,7 @@ public String getHtml(FlightSearchParam arg0) {
 				new NameValuePair("sc","0"),
 				new NameValuePair("stu","0"),
 				new NameValuePair("tsk","0"),
-				//new NameValuePair("refid","www.atlasjet.com"),
+				new NameValuePair("refid","www.atlasjet.com"),
 				new NameValuePair("paramstatus","1"),
 				new NameValuePair("openjaw",""),
 				new NameValuePair("bannerSize","200x200"),
@@ -133,7 +133,7 @@ String bookingUrlPre = "https://online.atlasjet.com/AtlasOnline/availability.kk"
 		map.put("sc","0");
 		map.put("stu","0");
 		map.put("tsk","0");
-		map.put("refid","www.atlasjet.com");
+		//map.put("refid","www.atlasjet.com");
 		map.put("paramstatus","1");
 		map.put("openjaw","");
 		map.put("bannerSize","200x200");
