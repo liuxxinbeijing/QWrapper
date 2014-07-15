@@ -150,8 +150,8 @@ public String getHtml(FlightSearchParam arg0) {
 					Price=m.group();
 					moneyUnit =  flightHtmlPrice.substring(Price.length());
 					moneyUnit = moneyUnit.replaceAll("\\s*|\t|\r|\n", "");
-					if(moneyUnit.equals("TL")){
-						moneyUnit="TRL";
+					if(moneyUnit.equals("$")){
+						moneyUnit="USD";
 					}
 				} else {	// 娑擃叀娴嗛懜顏嗗疆
 					// 闁插洨鏁ゆ稉濠佺閻濐厺鐜弽?
