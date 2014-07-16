@@ -172,7 +172,7 @@ public String getHtml(FlightSearchParam arg0) {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date retDate = format.parse(arg1.getRetDate());
 		Date depDate = format.parse(arg1.getDepDate());
-		// 闂佸憡鐟﹂悧鏇㈠吹椤撱垹鍌ㄩ柤濮愬€愰弻銈夋煠閸撹弓绨界憸閭﹀枟缁岄亶鍩勯崘褏绀€
+		// 闁告瑦鐗曢崵顓㈠储閼姐倐鏌ら柤鍓蹭簽瑜邦喗绌遍埄鍐х礀
 		String html2 = StringUtils.substringBetween(html,"<tbody>" ,"</tbody>");
 		String[] flights = html2.split("<tr class=\"showContent\">");
 		List<OneWayFlightInfo> flightList = new ArrayList<OneWayFlightInfo>();
@@ -180,23 +180,23 @@ public String getHtml(FlightSearchParam arg0) {
 			String Pricer="";
 			String moneyUnit =  "";
 			for (int i = 1; i < flights.length; i++){
-				// 濠碘槅鍋呭妯尖偓姘煎墴瀹曘垹鈽夊▎蹇曠獮闂佸憡娲﹂崢浠嬪磹濠电殞ml
+				// 婵☆偅婢樼€氼剟宕㈠☉娆忕窞闁告洦鍘介崐婵皌ml
 				String flightHtml = flights[i];
-				flightHtml = flightHtml.replaceAll("</?[^<]+>", "");	// 闂佸搫顦弲娑樏洪敃鍌氱闁靛牆顦Λ姗€鏌涢妷銏℃珖鐟滄澘娼￠弻娑㈠箛椤掍礁娅ｅ銈嗘⒐閸旀牜绮欐径鎰垫晣闁绘ê纾弳鐖僼ml
-				flightHtml = flightHtml.replaceAll("\\s*|\t|\r|\n", "");	// 闂備礁鎲￠敋妞ゎ厼鍢查埢宥嗘償閿濆洨鐓旈梺缁樺灦椤洦绔熼幇鐗堢厪闁糕剝娲滈ˇ锕傛煕閳哄偆娈橀柟顔诲嵆婵℃瓕顧侀柛搴★躬閺屾洟宕遍弴鐙€妲┑鐐插级閻楁顭囬鍫熸櫆闁芥ê顦花銉╂煟?
-				flightHtml = flightHtml.replaceAll("&nbsp;:", "");	// 闂備礁鎲￠敋妞ゎ厼鍢查埢宥嗘償閿濆洨鐓旈梺缁樺灦椤洦绔?
+				flightHtml = flightHtml.replaceAll("</?[^<]+>", "");	// 闁哄鏅涘ú锕傚箮閵堝妫橀柛銉㈡櫇瑜板潡鏌涢幇顒佸櫣妞ゆ梹鍔栫粙澶愵敇閻樺磭鏆爃tml
+				flightHtml = flightHtml.replaceAll("\\s*|\t|\r|\n", "");	// 闂佸憡锚椤嘲鈻嶆惔锝囩煔闁绘垶顭囨竟鎰版煏閸℃洜顦﹂柛鈺傤殘閹即濡歌閸庡﹪鏌曢崱鏇狀槮婵炲弶鐗楀顏堟晜閽樺绨ラ柣?
+				flightHtml = flightHtml.replaceAll("&nbsp;:", "");	// 闂佸憡锚椤嘲鈻嶆惔锝囩煔闁绘垶顭囨竟?
 				flightHtml = flightHtml.replaceAll("&nbsp;", "");
 				
-				// 闁诲孩顔栭崰鎺楀磻閹炬枼鏀芥い鏃傗拡閸庢挾鎮▎鎾寸厸?..
+				// 閻庢鍠掗崑鎾斥攽椤旂⒈鍎撶悮娆撴煛?..
 				String DepartureFlight = StringUtils.substringBetween(flights[i], "<td  style=\"\" title=\"\">", "</td>");
 				DepartureFlight = DepartureFlight.replaceAll("\\s*|\t|\r|\n", "");
-				int zzbz = StringUtils.indexOf(flights[i], "rowspan=\"");	// 濠电偞鍨堕幖鈺呭矗閳ь剚绻涢弶鎴烆棦鐎殿喕绮欏畷鎯邦槾缂?
+				int zzbz = StringUtils.indexOf(flights[i], "rowspan=\"");	// 婵炴垶鎼╅崣鈧繛鏉戞瀵粙宕惰缁?
 				if (zzbz >= 0) {
 					String temp = StringUtils.substringBetween(flights[i], "rowspan=\"", "\"");
 					zzbz = Integer.parseInt(temp);
 				}
-				if (zzbz > 0) {	// 闂備礁鎼崐瑙勫垔娴犲鏄ラ柛娑樼摠閸?
-					String flightHtmlPrice = StringUtils.substringBetween(flights[i], "<label", "label"); // 闂備浇顫夐幆灞剧濠婂棎浜归柛銉ｅ妿椤╃兘姊洪崹顕呭剳濠?
+				if (zzbz > 0) {	// 闂佸搫鍊规刊浠嬪春閸涘瓨鍋?
+					String flightHtmlPrice = StringUtils.substringBetween(flights[i], "<label", "label"); // 闂佽鎯屾禍婊嗐亹閸ャ劎顩烽梺鍨儑婢?
 					flightHtmlPrice = StringUtils.substringBetween(flightHtmlPrice, ">","<");
 					Pattern pt=Pattern.compile("([0-9]|\\.|\\-)*");
 					Matcher m=pt.matcher(flightHtmlPrice);
@@ -204,19 +204,20 @@ public String getHtml(FlightSearchParam arg0) {
 					Price=m.group();
 					moneyUnit =  flightHtmlPrice.substring(Price.length());
 					moneyUnit = moneyUnit.replaceAll("\\s*|\t|\r|\n", "");
-					if(moneyUnit.equals("$")){
-						moneyUnit="USD";
+					if(moneyUnit.equals("TL")){
+						moneyUnit="TRL";
 					}
-				} else {	// 濠电偞鍨堕幖鈺呭矗閳ь剚绻涢弶鎴烆棦闁硅櫕绮撻、鏃堝幢濡ゅ啯鐎?					// 闂傚倷鐒﹁ぐ鍐洪妸鈺佹瀬闁靛牆妫涢埢鏂库攽閻樿精鍏屾い蹇涗憾閺岋絽鈹戦幇顒€绠抽梺缁樼矤閸ㄨ泛顕?
+				} else {	// 婵炴垶鎼╅崣鈧繛鏉戞閹虫粓顢旈崱妤冩瀭
+					// 闂備焦褰冨ú銊╁极閵堝棛鈻斿┑鐘辫兌椤忛亶鏌ｅ┑鎰箳闁绘粠鍨跺?
 				}
 				
-				// 闂佽崵濮崇粈浣规櫠娴犲鍋柛婵堫劆seFlight
+				// 闁荤姳绀佹晶浠嬫偪閸濈seFlight
 				if (zzbz > 0) {
 					OneWayFlightInfo baseFlight = new OneWayFlightInfo();
 					FlightDetail flightDetail = new FlightDetail();
 					List<FlightSegement> segs = new ArrayList<FlightSegement>();
 					
-					//	闂佽崵濮崇粈浣规櫠娴犲鍋柛鐐板悍ightDetail
+					//	闁荤姳绀佹晶浠嬫偪閸炰康ightDetail
 					List<String> flightNoList = new ArrayList<String>();
 					flightNoList.add(DepartureFlight);
 					flightDetail.setFlightno(flightNoList);
@@ -229,7 +230,7 @@ public String getHtml(FlightSearchParam arg0) {
 					flightDetail.setWrapperid(arg1.getWrapperid());
 					baseFlight.setDetail(flightDetail);
 					
-					// 闂佽崵濮崇粈浣规櫠娴犲鍋柛婊咁潛ightSegement
+					// 闁荤姳绀佹晶浠嬫偪閸滅ightSegement
 					String deptimes = flightHtml.substring(0, 5);
 					String arrtimes = flightHtml.substring(5, 10);
 					FlightSegement seg = new FlightSegement();
@@ -246,11 +247,12 @@ public String getHtml(FlightSearchParam arg0) {
 					
 					baseFlight.setInfo(segs);
 					flightList.add(baseFlight);
-				} else {	// 濠电偞鍨堕幖鈺呭矗閳ь剚绻涢弶鎴烆棦闁硅櫕绮撻、鏃堝幢濡ゅ啯鐎?					OneWayFlightInfo baseFlight = flightList.get(flightList.size() - 1);
+				} else {	// 婵炴垶鎼╅崣鈧繛鏉戞閹虫粓顢旈崱妤冩瀭
+					OneWayFlightInfo baseFlight = flightList.get(flightList.size() - 1);
 					FlightDetail flightDetail = baseFlight.getDetail();
 					List<FlightSegement> segs = baseFlight.getInfo();
 					
-					//	闂佽崵濮崇粈浣规櫠娴犲鍋柛鐐板悍ightDetail
+					//	闁荤姳绀佹晶浠嬫偪閸炰康ightDetail
 					List<String> flightNoList = flightDetail.getFlightno();
 					flightNoList.add(DepartureFlight);
 					flightDetail.setFlightno(flightNoList);
@@ -273,44 +275,45 @@ public String getHtml(FlightSearchParam arg0) {
 					baseFlight.setInfo(segs);
 				}
 			}
-				// 闂佸憡鐟﹂悧鏇㈠吹椤撶喐浜ら柡鍐ㄥ€甸弻銈夋煠閸撹弓绨界憸閭﹀枟缁岄亶鍩勯崘褏绀€
+				// 闁告瑦鐗曢崵顓熸交閺冨倵鏌ら柤鍓蹭簽瑜邦喗绌遍埄鍐х礀
 				String halfHtml = StringUtils.substringAfter(html, "<div id=\"plan1\">");
 				String htmlr = StringUtils.substringBetween(halfHtml,"<tbody>" ,"</tbody>");
 				String[] flightsr = htmlr.split("<tr class=\"showContent\">");					
 					List<RoundTripFlightInfo> flightListr = new ArrayList<RoundTripFlightInfo>();
  					for (int j = 1; j < flightsr.length; j++){
-						// 濠碘槅鍋呭妯尖偓姘煎墴瀹曘垹鈽夊▎蹇曠獮闂佸憡娲﹂崢浠嬪磹濠电殞ml
+						// 婵☆偅婢樼€氼剟宕㈠☉娆忕窞闁告洦鍘介崐婵皌ml
 						String flightHtmlr = flightsr[j];
 						System.out.println(flightHtmlr);
-						flightHtmlr = flightHtmlr.replaceAll("</?[^<]+>", "");	// 闂佸搫顦弲娑樏洪敃鍌氱闁靛牆顦Λ姗€鏌涢妷銏℃珖鐟滄澘娼￠弻娑㈠箛椤掍礁娅ｅ銈嗘⒐閸旀牜绮欐径鎰垫晣闁绘ê纾弳鐖僼ml
-						flightHtmlr = flightHtmlr.replaceAll("\\s*|\t|\r|\n", "");	// 闂備礁鎲￠敋妞ゎ厼鍢查埢宥嗘償閿濆洨鐓旈梺缁樺灦椤洦绔熼幇鐗堢厪闁糕剝娲滈ˇ锕傛煕閳哄偆娈橀柟顔诲嵆婵℃瓕顧侀柛搴★躬閺屾洟宕遍弴鐙€妲┑鐐插级閻楁顭囬鍫熸櫆闁芥ê顦花銉╂煟?
-						flightHtmlr = flightHtmlr.replaceAll("&nbsp;:", "");	// 闂備礁鎲￠敋妞ゎ厼鍢查埢宥嗘償閿濆洨鐓旈梺缁樺灦椤洦绔?
+						flightHtmlr = flightHtmlr.replaceAll("</?[^<]+>", "");	// 闁哄鏅涘ú锕傚箮閵堝妫橀柛銉㈡櫇瑜板潡鏌涢幇顒佸櫣妞ゆ梹鍔栫粙澶愵敇閻樺磭鏆爃tml
+						flightHtmlr = flightHtmlr.replaceAll("\\s*|\t|\r|\n", "");	// 闂佸憡锚椤嘲鈻嶆惔锝囩煔闁绘垶顭囨竟鎰版煏閸℃洜顦﹂柛鈺傤殘閹即濡歌閸庡﹪鏌曢崱鏇狀槮婵炲弶鐗楀顏堟晜閽樺绨ラ柣?
+						flightHtmlr = flightHtmlr.replaceAll("&nbsp;:", "");	// 闂佸憡锚椤嘲鈻嶆惔锝囩煔闁绘垶顭囨竟?
 						flightHtmlr = flightHtmlr.replaceAll("&nbsp;", "");						
-						// 闁诲孩顔栭崰鎺楀磻閹炬枼鏀芥い鏃傗拡閸庢挾鎮▎鎾寸厸?..
+						// 閻庢鍠掗崑鎾斥攽椤旂⒈鍎撶悮娆撴煛?..
 						String DepartureFlightr = StringUtils.substringBetween(flightsr[j], "<td  style=\"\" title=\"\">", "</td>");
 						DepartureFlightr = DepartureFlightr.replaceAll("\\s*|\t|\r|\n", "");
-						int zzb = StringUtils.indexOf(flightsr[j], "rowspan=\"");	// 濠电偞鍨堕幖鈺呭矗閳ь剚绻涢弶鎴烆棦鐎殿喕绮欏畷鎯邦槾缂?
+						int zzb = StringUtils.indexOf(flightsr[j], "rowspan=\"");	// 婵炴垶鎼╅崣鈧繛鏉戞瀵粙宕惰缁?
 						if (zzb>= 0) {
 							String tempr = StringUtils.substringBetween(flightsr[j], "rowspan=\"", "\"");
 							zzb = Integer.parseInt(tempr);
 						}
-						if (zzb> 0) {	// 闂備礁鎼崐瑙勫垔娴犲鏄ラ柛娑樼摠閸?
-							String flightHtmlPricer= StringUtils.substringBetween(flightsr[j], "<label", "label"); // 闂備浇顫夐幆灞剧濠婂棎浜归柛銉ｅ妿椤╃兘姊洪崹顕呭剳濠?
+						if (zzb> 0) {	// 闂佸搫鍊规刊浠嬪春閸涘瓨鍋?
+							String flightHtmlPricer= StringUtils.substringBetween(flightsr[j], "<label", "label"); // 闂佽鎯屾禍婊嗐亹閸ャ劎顩烽梺鍨儑婢?
 							flightHtmlPricer = StringUtils.substringBetween(flightHtmlPricer, ">","<");
 							Pattern ptr=Pattern.compile("([0-9]|\\.|\\-)*");
 							Matcher mr=ptr.matcher(flightHtmlPricer);
 							mr.find();
 							Pricer=mr.group();
-						} else {	// 濠电偞鍨堕幖鈺呭矗閳ь剚绻涢弶鎴烆棦闁硅櫕绮撻、鏃堝幢濡ゅ啯鐎?							// 闂傚倷鐒﹁ぐ鍐洪妸鈺佹瀬闁靛牆妫涢埢鏂库攽閻樿精鍏屾い蹇涗憾閺岋絽鈹戦幇顒€绠抽梺缁樼矤閸ㄨ泛顕?
+						} else {	// 婵炴垶鎼╅崣鈧繛鏉戞閹虫粓顢旈崱妤冩瀭
+							// 闂備焦褰冨ú銊╁极閵堝棛鈻斿┑鐘辫兌椤忛亶鏌ｅ┑鎰箳闁绘粠鍨跺?
 						}
 						
-						// 闂佽崵濮崇粈浣规櫠娴犲鍋柛婵堫劆seFlight
+						// 闁荤姳绀佹晶浠嬫偪閸濈seFlight
 						if (zzb> 0) {
 							RoundTripFlightInfo baseFlightr = new RoundTripFlightInfo();
 							//FlightDetail flightDetailr = new FlightDetail();
 							List<FlightSegement> segsr = new ArrayList<FlightSegement>();
 							
-							//	闂佽崵濮崇粈浣规櫠娴犲鍋柛鐐板悍ightDetail
+							//	闁荤姳绀佹晶浠嬫偪閸炰康ightDetail
 							List<String> flightNoListr = new ArrayList<String>();
 							flightNoListr.add(DepartureFlightr);
 							baseFlightr.setRetflightno(flightNoListr);
@@ -324,14 +327,14 @@ public String getHtml(FlightSearchParam arg0) {
 							//flightDetailr.setWrapperid(arg1.getWrapperid());
 							//baseFlightr.setDetail(flightDetailr);
 							
-							// 闂佽崵濮崇粈浣规櫠娴犲鍋柛婊咁潛ightSegement
+							// 闁荤姳绀佹晶浠嬫偪閸滅ightSegement
 							String deptimesr = flightHtmlr.substring(0, 5);
 							String arrtimesr = flightHtmlr.substring(5, 10);
 							FlightSegement segr = new FlightSegement();
 							segr.setFlightno(DepartureFlightr);
 							SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");  
 							String strDate = sdf.format(retDate);  
-							segr.setDepDate(strDate);//?闁哄鏅滈悷銉ヮ焽閳╁啰鈻旂€广儱娲ㄩ崣鈧梻渚囧墯閹告悂顢氶鐣屸枖?							
+							segr.setDepDate(strDate);//?閺夆晜鐟ュ鈩冪▔瀹ュ洨鍙€闂侇剚鎸搁顔界▔?							
 							segr.setArrDate(strDate);
 							segr.setDepairport(arg1.getArr());
 							segr.setArrairport(arg1.getDep());
@@ -341,11 +344,12 @@ public String getHtml(FlightSearchParam arg0) {
 							
 							baseFlightr.setRetinfo(segsr);
 							flightListr.add(baseFlightr);
-						}else {	// 濠电偞鍨堕幖鈺呭矗閳ь剚绻涢弶鎴烆棦闁硅櫕绮撻、鏃堝幢濡ゅ啯鐎?							RoundTripFlightInfo baseFlightr = flightListr.get(flightListr.size() - 1);
+						}else {	// 婵炴垶鎼╅崣鈧繛鏉戞閹虫粓顢旈崱妤冩瀭
+							RoundTripFlightInfo baseFlightr = flightListr.get(flightListr.size() - 1);
 							//FlightDetail flightDetailr = baseFlightr.getDetail();
 							List<FlightSegement> segsr = baseFlightr.getRetinfo();
 							
-							//	闂佽崵濮崇粈浣规櫠娴犲鍋柛鐐板悍ightDetail
+							//	闁荤姳绀佹晶浠嬫偪閸炰康ightDetail
 							List<String> flightNoListr = baseFlightr.getRetflightno();
 							flightNoListr.add(DepartureFlightr);
 							baseFlightr.setRetflightno(flightNoListr);
@@ -369,14 +373,14 @@ public String getHtml(FlightSearchParam arg0) {
 							baseFlightr.setRetinfo(segsr);
 						}
  					}
-			//缂傚倷绀佺€氼剟骞冩惔銊ョ畾闁告侗鍘奸弸宀勬煥?						
+			//缂備礁瀚幃搴ㄥ箚閸涱厼鏋岄柨?						
  					List<RoundTripFlightInfo> allList = new ArrayList<RoundTripFlightInfo>();
 						for (int qc = 0;qc < flightList.size();qc++) {
 							for (int fc = 0;fc < flightListr.size();fc++) {
 								OneWayFlightInfo qcFlightInfo = flightList.get(qc);
 								RoundTripFlightInfo fcFlightInfo = flightListr.get(fc);
 								
-								// 缂傚倷绀佺€氼剟骞?
+								// 缂備礁瀚幃?
 								RoundTripFlightInfo roundTripFlightInfo = new RoundTripFlightInfo();
 								roundTripFlightInfo.setRetdepdate(fcFlightInfo.getRetdepdate());
 								roundTripFlightInfo.setRetflightno(fcFlightInfo.getRetflightno());
@@ -393,7 +397,7 @@ public String getHtml(FlightSearchParam arg0) {
 								qcFlightDetail.setMonetaryunit(oldFlightDetail.getMonetaryunit());
 								qcFlightDetail.setPrice(oldFlightDetail.getPrice() + fcFlightInfo.getReturnedPrice());	
 								qcFlightDetail.setWrapperid(oldFlightDetail.getWrapperid());
-								//闂佸憡鑹鹃悧鍡涙嚐閻旂厧绠戦悹浣哥－楠?								
+								//闁告艾鐗嗛懟鐔煎箑鐠佸磭骞?								
 								roundTripFlightInfo.setDetail(qcFlightDetail);								
 								allList.add(roundTripFlightInfo);							
 							}
@@ -412,7 +416,6 @@ public String getHtml(FlightSearchParam arg0) {
 		
 		return result;
 	}
-				
-}	 
+	}
 	
 }
